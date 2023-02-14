@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+ mysql:
+   image: mysql
+   environment:
+    MYSQL_DATABASE: 'b3cyber'
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+ phpmyadmin:
+  image: phpmyadmin
+  depends_on:
+    - mysql
+  ports: 
+    - 7000:70
+  environment:
+    PMA_HOST: mysql
+    PMA_PORT: 3000
+    UPLOAD_LIMIT: 64M
+ apachephp:
+    build:
+      apachephp
+    ports:
+      - 7001:80
+    volumes:
+      - ./apachephp/vhosts:/etc/apache2/sites-enabled
+      - ./app:/var/www
