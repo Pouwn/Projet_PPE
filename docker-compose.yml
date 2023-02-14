@@ -4,24 +4,24 @@ services:
  mysql:
    image: mysql
    environment:
-    MYSQL_DATABASE: 'b3cyber'
-    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    MYSQL_DATABASE: 'projetppe'
+    MYSQL_ROOT_PASSWORD: ppegroupe2
 
  phpmyadmin:
   image: phpmyadmin
   depends_on:
     - mysql
   ports: 
-    - 7000:70
+    - 8081:80
   environment:
     PMA_HOST: mysql
-    PMA_PORT: 3000
+    PMA_PORT: 3306
     UPLOAD_LIMIT: 64M
  apachephp:
     build:
       apachephp
     ports:
-      - 7001:80
+      - 8002:80
     volumes:
       - ./apachephp/vhosts:/etc/apache2/sites-enabled
       - ./app:/var/www
